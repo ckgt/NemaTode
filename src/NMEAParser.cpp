@@ -67,7 +67,7 @@ bool hasNonAlphaNum(string txt){
 bool validParamChars(string txt){
 	for (size_t i = 0; i < txt.size(); i++){
 		if (!isalnum(txt[i])){
-			if (txt[i] != '-'){
+			if (txt[i] != '-' && txt[i] != '.'){
 				return false;
 			}
 		}
@@ -450,7 +450,7 @@ void NMEAParser::parseText(NMEASentence& nmea, string txt){
 		if (!validParamChars(nmea.parameters[i])){
 			nmea.isvalid = false;
 			stringstream ss;
-			ss << "Invalid character in parameter (from 0) " << i << ".";
+			ss << "Invalid character (non-alpha-num) in parameter " << i << " (from 0): \"" << nmea.parameters[i] << "\"";
 			onError(nmea, ss.str() );
 			break;
 		}
