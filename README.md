@@ -45,11 +45,7 @@ This is all you need to use the GPS NMEA sentence data.
 
   - Standard:
 ```` 
-    GPGGA,
-    GPGSA,
-    GPGSV,
-    GPRMC,
-    GPVTG
+    GPGGA, GPGSA, GPGSV, GPRMC, GPVTG
 ````
 
 * **NMEA Generation** of "standard" and custom sentences.
@@ -89,9 +85,10 @@ The handler for "MYNMEA" is called. This is where you can catch the sentence and
             // bad checksum, but valid syntax
         }
         if( nmea.parameters.size() < 3 ){
-            // missing data, throw something
+            // missing data, throw something.
+            // catch it at the read*() call.
         }
-        int mydata = parseInt(nmea.parameters[3]);
+        int mydata = parseInt(nmea.parameters[2]);
     };
 
 
