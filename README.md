@@ -1,10 +1,12 @@
 # NemaTode
 
-*C++ NMEA Parser & GPS Framework*
+*Cross platform C++ 11 NMEA Parser & GPS Framework*
 
 NemaTode is yet another lightweight generic NMEA parser.
 
 It also comes with a GPS data interface to handle the most popular GPS NMEA sentences.
+
+Confirmed on MSVC 2013 and GCC 4.8.4.
 
 ## It's too easy!
 This is all you need to use the GPS NMEA sentence data.
@@ -62,7 +64,7 @@ This is all you need to use the GPS NMEA sentence data.
     
 * **C++ 11 features**
    - Those fancy event handlers...
-   - If you are on an embedded system... sorry. This might not work for you.
+   - If you are on an embedded system... sorry. This might not work for you because of compiler restrictions. Make sure there is full support for lambdas and variadic templates. Tested GCC 4.8.4, confirmed.
 
 ## Details
 NMEA is very popular with GPS. Unfortunately the GPS data is fragmented
@@ -121,12 +123,12 @@ There are 2 ways to operate...
     NMEACommand mycmd;
     mycmd.name = "MYCMD";
     mycmd.message = "your,data,csv";
-    string nmea = mycmd.toString();  // Creates: 
+    string nmea = mycmd.toString();  // Creates: $MYCMD,your,data,csv*15
 
 
 There are 2 included NMEACommands that can configure a GPS.
 
- * ```` PSRF103```` Configures message output ID and rate, and 
+ * ```` PSRF103```` Configures message output ID and rate, and whether or not to use checksums.
 
  * ```` PSRF100```` Configures the UART serial connection (if the chip has one).
 
