@@ -3,6 +3,8 @@
  *
  *  Created on: Sep 5, 2014
  *      Author: Cameron Karlsson
+ *
+ *  See the license file included with this source.
  */
 
 #ifndef EVENT_H_

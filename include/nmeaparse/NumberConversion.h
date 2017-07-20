@@ -3,6 +3,8 @@
  *
  *  Created on: Aug 14, 2014
  *      Author: Cameron Karlsson
+ *
+ *  See the license file included with this source.
  */
 
 #ifndef NUMBERCONVERSION_H_

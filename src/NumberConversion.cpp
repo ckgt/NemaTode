@@ -3,6 +3,8 @@
  *
  *  Created on: Sep 2, 2014
  *      Author: Cameron Karlsson
+ *
+ *  See the license file included with this source.
  */
 
 #include <nmeaparse/NumberConversion.h>
