@@ -40,7 +40,7 @@ std::string NMEAParseError::what(){
 
 	// --------- NMEA SENTENCE --------------
 
-NMEASentence::NMEASentence() : isvalid(false), calculatedChecksum(0), parsedChecksum(0)
+NMEASentence::NMEASentence() : isvalid(false), checksumIsCalculated(false), calculatedChecksum(0), parsedChecksum(0)
 {}
 NMEASentence::~NMEASentence()
 {}
@@ -48,7 +48,7 @@ bool NMEASentence::valid() const {
 	return isvalid;
 }
 bool NMEASentence::checksumOK() const {
-	return (parsedChecksum != 0 && calculatedChecksum != 0)
+	return (checksumIsCalculated)
 		&&
 		(parsedChecksum == calculatedChecksum);
 }
@@ -119,6 +119,26 @@ void NMEAParser::setSentenceHandler(std::string cmdKey, std::function<void(const
 	//std::pair<string, function<void(NMEASentence)>> entry(cmdKey, handler);
 	//eventTable.insert(entry);
 	eventTable.insert({ cmdKey, handler });
+}
+string NMEAParser::getRegisteredSentenceHandlersCSV()
+{
+	if(eventTable.empty()){
+		return "";
+	}
+
+	ostringstream ss;
+	for( auto it = eventTable.begin(); it != eventTable.end(); it++){
+		ss << it->first;
+
+		if( it->second ){
+			ss << "(not callable)";
+		}
+	}
+	string s = ss.str();
+	if( ! s.empty() ){
+		s.resize(s.size()-1); // chop off comma
+	}
+	return s;
 }
 
 void NMEAParser::readByte(uint8_t b){
@@ -434,6 +454,7 @@ void NMEAParser::parseText(NMEASentence& nmea, string txt){
 				try
 				{
 					nmea.parsedChecksum = (uint8_t)parseInt(nmea.checksum, 16);
+					nmea.checksumIsCalculated = true;
 				}
 				catch( NumberConversionError& )
 				{

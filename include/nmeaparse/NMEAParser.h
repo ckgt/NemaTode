@@ -42,6 +42,7 @@ public:
 	std::string name;			//name of the command
 	std::vector<std::string> parameters;	//list of parameters from the command
 	std::string checksum;
+	bool checksumIsCalculated;
 	uint8_t parsedChecksum;
 	uint8_t calculatedChecksum;
 
@@ -57,7 +58,6 @@ public:
 	};
 public:
 	NMEASentence();
-	//NMEASentence(const NMEASentence& ref);
 	virtual ~NMEASentence();
 
 	bool checksumOK() const;
@@ -104,6 +104,7 @@ public:
 
 	Event<void(const NMEASentence&)> onSentence;				// called every time parser receives any NMEA sentence
 	void setSentenceHandler(std::string cmdKey, std::function<void(const NMEASentence&)> handler);	//one handler called for any named sentence where name is the "cmdKey"
+	std::string getRegisteredSentenceHandlersCSV();                          // show a list of message names that currently have handlers.
 
 	// Byte streaming functions
 	void readByte		(uint8_t b);
