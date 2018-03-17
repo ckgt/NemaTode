@@ -1,6 +1,6 @@
 # Simple makefile for the demos in the top level directory.
 
-.PHONY: advanced demo
+.PHONY: advanced simple
 
 all: simple advanced
 	@echo "Done!"
