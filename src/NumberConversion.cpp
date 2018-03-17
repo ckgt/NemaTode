@@ -8,6 +8,7 @@
  */
 
 #include <nmeaparse/NumberConversion.h>
+#include <cstdlib>
 
 using namespace std;
 
