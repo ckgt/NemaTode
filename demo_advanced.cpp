@@ -25,7 +25,7 @@ int main(int argc, char** argv){
 	// Create a GPS service that will keep track of the fix data.
 	NMEAParser parser;
 	GPSService gps(parser);
-	//gps.parser.log = true;		// true: will spit out all sorts of parse info on each sentence.
+	//parser.log = true;		// true: will spit out all sorts of parse info on each sentence.
 
 	// Handle events when the lock state changes
 	gps.onLockStateChanged += [](bool newlock){
