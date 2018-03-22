@@ -38,15 +38,22 @@ std::string NMEAParseError::what(){
 
 
 
-	// --------- NMEA SENTENCE --------------
+// --------- NMEA SENTENCE --------------
 
-NMEASentence::NMEASentence() : isvalid(false), checksumIsCalculated(false), calculatedChecksum(0), parsedChecksum(0)
-{}
+NMEASentence::NMEASentence() 
+: isvalid(false)
+, checksumIsCalculated(false)
+, calculatedChecksum(0)
+, parsedChecksum(0)
+{ }
+
 NMEASentence::~NMEASentence()
-{}
+{ }
+
 bool NMEASentence::valid() const {
 	return isvalid;
 }
+
 bool NMEASentence::checksumOK() const {
 	return (checksumIsCalculated)
 		&&
@@ -97,27 +104,22 @@ void trim(string& str){
 }
 
 
-	// --------- NMEA PARSER --------------
+// --------- NMEA PARSER --------------
 
 
 
 NMEAParser::NMEAParser() 
-	: log(false), maxbuffersize(NMEA_PARSER_MAX_BUFFER_SIZE), fillingbuffer(false)
-{
-	
+: log(false)
+, maxbuffersize(NMEA_PARSER_MAX_BUFFER_SIZE)
+, fillingbuffer(false)
+{ }
 
-}
-
-NMEAParser::~NMEAParser() {
-	// TODO Auto-generated destructor stub
-}
+NMEAParser::~NMEAParser() 
+{ }
 
 
 void NMEAParser::setSentenceHandler(std::string cmdKey, std::function<void(const NMEASentence&)> handler){
 	eventTable.erase(cmdKey);
-
-	//std::pair<string, function<void(NMEASentence)>> entry(cmdKey, handler);
-	//eventTable.insert(entry);
 	eventTable.insert({ cmdKey, handler });
 }
 string NMEAParser::getRegisteredSentenceHandlersCSV()
@@ -128,9 +130,9 @@ string NMEAParser::getRegisteredSentenceHandlersCSV()
 
 	ostringstream ss;
 	for( auto it = eventTable.begin(); it != eventTable.end(); it++){
-		ss << it->first;
+		ss << it->first << ",";
 
-		if( it->second ){
+		if( ! it->second ){
 			ss << "(not callable)";
 		}
 	}
