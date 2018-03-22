@@ -130,11 +130,12 @@ string NMEAParser::getRegisteredSentenceHandlersCSV()
 
 	ostringstream ss;
 	for( auto it = eventTable.begin(); it != eventTable.end(); it++){
-		ss << it->first << ",";
+		ss << it->first;
 
 		if( ! it->second ){
 			ss << "(not callable)";
 		}
+		ss << ",";
 	}
 	string s = ss.str();
 	if( ! s.empty() ){
