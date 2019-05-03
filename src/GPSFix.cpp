@@ -71,15 +71,15 @@ double GPSAlmanac::averageSNR(){
 
 	double avg = 0;
 	double relevant = 0;
-	for (size_t i = 0; i < satellites.size(); i++){
-		if (satellites[i].snr > 0){
+	for (auto& satellite : satellites){
+		if (satellite.snr > 0){
 			relevant += 1.0;
 		}
 	}
 
-	for (size_t i = 0; i < satellites.size(); i++){
-		if (satellites[i].snr > 0){
-			avg += satellites[i].snr / relevant;
+	for (auto& satellite : satellites){
+		if (satellite.snr > 0){
+			avg += satellite.snr / relevant;
 		}
 	}
 
@@ -91,11 +91,11 @@ double GPSAlmanac::minSNR(){
 		return 0;
 	}
 	int32_t num_over_zero = 0;
-	for (size_t i = 0; i < satellites.size(); i++){
-		if (satellites[i].snr > 0){
+	for (auto& satellite : satellites){
+		if (satellite.snr > 0){
 			num_over_zero++;
-			if (satellites[i].snr < min){
-				min = satellites[i].snr;
+			if (satellite.snr < min){
+				min = satellite.snr;
 			}
 		}
 	}
@@ -107,10 +107,10 @@ double GPSAlmanac::minSNR(){
 
 double GPSAlmanac::maxSNR(){
 	double max = 0;
-	for (size_t i = 0; i < satellites.size(); i++){
-		if (satellites[i].snr > 0){
-			if (satellites[i].snr > max){
-				max = satellites[i].snr;
+	for (auto& satellite : satellites){
+		if (satellite.snr > 0){
+			if (satellite.snr > max){
+				max = satellite.snr;
 			}
 		}
 	}
