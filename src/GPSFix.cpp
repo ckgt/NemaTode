@@ -71,13 +71,13 @@ double GPSAlmanac::averageSNR(){
 
 	double avg = 0;
 	double relevant = 0;
-	for (auto& satellite : satellites){
+	for (const auto& satellite : satellites){
 		if (satellite.snr > 0){
 			relevant += 1.0;
 		}
 	}
 
-	for (auto& satellite : satellites){
+	for (const auto& satellite : satellites){
 		if (satellite.snr > 0){
 			avg += satellite.snr / relevant;
 		}
@@ -91,7 +91,7 @@ double GPSAlmanac::minSNR(){
 		return 0;
 	}
 	int32_t num_over_zero = 0;
-	for (auto& satellite : satellites){
+	for (const auto& satellite : satellites){
 		if (satellite.snr > 0){
 			num_over_zero++;
 			if (satellite.snr < min){
@@ -107,7 +107,7 @@ double GPSAlmanac::minSNR(){
 
 double GPSAlmanac::maxSNR(){
 	double max = 0;
-	for (auto& satellite : satellites){
+	for (const auto& satellite : satellites){
 		if (satellite.snr > 0){
 			if (satellite.snr > max){
 				max = satellite.snr;
