@@ -216,7 +216,7 @@ void NMEAParser::readSentence(std::string cmd){
 
 	onInfo(nmea, "Processing NEW string...");
 	
-	if (cmd.size() == 0){
+	if (cmd.empty()){
 		onWarning(nmea, "Blank string -- Skipped processing.");
 		return;
 	}
@@ -323,7 +323,7 @@ uint8_t NMEAParser::calculateChecksum(string s){
 
 void NMEAParser::parseText(NMEASentence& nmea, string txt){
 
-	if (txt.size() == 0){
+	if (txt.empty()){
 		nmea.isvalid = false;
 		return;
 	}
@@ -364,7 +364,7 @@ void NMEAParser::parseText(NMEASentence& nmea, string txt){
 	// Handle comma edge cases
 	size_t comma = txt.find(',');
 	if (comma == string::npos){		//comma not found, but there is a name...
-		if (txt.size() > 0)
+		if (!txt.empty())
 		{	// the received data must just be the name
 			if ( hasNonAlphaNum(txt) ){
 				nmea.isvalid = false;

@@ -87,7 +87,7 @@ double GPSAlmanac::averageSNR(){
 }
 double GPSAlmanac::minSNR(){
 	double min = 9999999;
-	if (satellites.size() == 0){
+	if (satellites.empty()){
 		return 0;
 	}
 	int32_t num_over_zero = 0;
@@ -397,7 +397,7 @@ std::string GPSFix::toString(){
 		<< "   SNR:                avg: " << almanac.averageSNR() << " dB   [min: " << almanac.minSNR() << " dB,  max:" << almanac.maxSNR() << " dB]" << endl;
 
 	ss << " < Almanac (" << almanac.percentComplete() << "%) >" << endl;
-	if (almanac.satellites.size() == 0){
+	if (almanac.satellites.empty()){
 		ss << " > No satellite info in almanac." << endl;
 	}
 	for (size_t i = 0; i < almanac.satellites.size(); i++){

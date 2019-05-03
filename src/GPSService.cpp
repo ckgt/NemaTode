@@ -31,7 +31,7 @@ double convertLatLongToDeg(string llstr, string dir){
 	deg = deg + mins / 60.0;
 
 	char hdg = 'x';
-	if (dir.size() > 0){
+	if (!dir.empty()){
 		hdg = dir[0];
 	}
 
@@ -152,14 +152,14 @@ void GPSService::read_GPGGA(const NMEASentence& nmea){
 		// LAT
 		sll = nmea.parameters[1];
 		dir = nmea.parameters[2];
-		if (sll.size() > 0){
+		if (!sll.empty()){
 			this->fix.latitude = convertLatLongToDeg(sll, dir);
 		}
 
 		// LONG
 		sll = nmea.parameters[3];
 		dir = nmea.parameters[4];
-		if (sll.size() > 0){
+		if (!sll.empty()){
 			this->fix.longitude = convertLatLongToDeg(sll, dir);
 		}
 
@@ -183,7 +183,7 @@ void GPSService::read_GPGGA(const NMEASentence& nmea){
 		}
 
 		// ALTITUDE
-		if (nmea.parameters[8].size() > 0){
+		if (!nmea.parameters[8].empty()){
 			this->fix.altitude = parseDouble(nmea.parameters[8]);
 		}
 		else {
@@ -414,14 +414,14 @@ void GPSService::read_GPRMC(const NMEASentence& nmea){
 		// LAT
 		sll = nmea.parameters[2];
 		dir = nmea.parameters[3];
-		if (sll.size() > 0){
+		if (!sll.empty()){
 			this->fix.latitude = convertLatLongToDeg(sll, dir);
 		}
 
 		// LONG
 		sll = nmea.parameters[4];
 		dir = nmea.parameters[5];
-		if (sll.size() > 0){
+		if (!sll.empty()){
 			this->fix.longitude = convertLatLongToDeg(sll, dir);
 		}
 
@@ -429,7 +429,7 @@ void GPSService::read_GPRMC(const NMEASentence& nmea){
 		// ACTIVE
 		bool lockupdate = false;
 		char status = 'V';
-		if (nmea.parameters[1].size() > 0){
+		if (!nmea.parameters[1].empty()){
 			status = nmea.parameters[1][0];
 		}
 		this->fix.status = status;
