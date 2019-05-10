@@ -116,8 +116,6 @@ There are 2 ways to operate...
  * Sentence Generation
  * Custom Sentence handling
 
-.
-
 **Generation**
     
     NMEACommand mycmd;
@@ -133,6 +131,18 @@ There are 2 included NMEACommands that can configure a GPS.
  * ```` PSRF100```` Configures the UART serial connection (if the chip has one).
 
 
+## Include NemaTode in your project
+You can include NemaTode via [CMake](https://cmake.org) in our project.
+Your basic CMakeLists.txt file could look like:
+
+    cmake_minimum_required(VERSION 3.1)
+    project(MyProject)
+
+    find_package(NemaTode REQUIRED CONFIG)
+
+    add_executable(${PROJECT_NAME} mycode.cpp)
+
+    target_link_libraries(${PROJECT_NAME} NemaTode::NemaTode)
 
 
 ## GPS Fix data available
