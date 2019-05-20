@@ -64,8 +64,8 @@ bool NMEASentence::checksumOK() const {
 
 // true if the text contains a non-alpha numeric value
 bool hasNonAlphaNum(string txt){
-	for (size_t i = 0; i < txt.size(); i++){
-		if ( !isalnum(txt[i]) ){
+	for (const char i : txt){
+		if ( !isalnum(i) ){
 			return true;
 		}
 	}
@@ -74,9 +74,9 @@ bool hasNonAlphaNum(string txt){
 
 // true if alphanumeric or '-'
 bool validParamChars(string txt){
-	for (size_t i = 0; i < txt.size(); i++){
-		if (!isalnum(txt[i])){
-			if (txt[i] != '-' && txt[i] != '.'){
+	for (const char i : txt){
+		if (!isalnum(i)){
+			if (i != '-' && i != '.'){
 				return false;
 			}
 		}
@@ -88,10 +88,10 @@ bool validParamChars(string txt){
 void squish(string& str){
 
 	char chars[] = {'\t',' '};
-	for (size_t i = 0; i < sizeof(chars); ++i)
+	for (const char i : chars)
 	{
 		// needs include <algorithm>
-		str.erase(std::remove(str.begin(), str.end(), chars[i]), str.end());
+		str.erase(std::remove(str.begin(), str.end(), i), str.end());
 	}
 }
 
@@ -129,10 +129,10 @@ string NMEAParser::getRegisteredSentenceHandlersCSV()
 	}
 
 	ostringstream ss;
-	for( auto it = eventTable.begin(); it != eventTable.end(); it++){
-		ss << it->first;
+	for(const auto& table : eventTable){
+		ss << table.first;
 
-		if( ! it->second ){
+		if( ! table.second ){
 			ss << "(not callable)";
 		}
 		ss << ",";
@@ -188,8 +188,8 @@ void NMEAParser::readBuffer(uint8_t* b, uint32_t size){
 
 void NMEAParser::readLine(string cmd){
 	cmd += "\r\n";
-	for (size_t i = 0; i < cmd.size(); ++i){
-		readByte(cmd[i]);
+	for (const char i : cmd){
+		readByte(i);
 	}
 }
 
@@ -306,8 +306,8 @@ void NMEAParser::readSentence(std::string cmd){
 // then calculates a rolling XOR on the bytes
 uint8_t NMEAParser::calculateChecksum(string s){
 	uint8_t checksum = 0;
-	for (size_t i = 0; i < s.size(); i++){
-		checksum = checksum ^ s[i];
+	for (const char i : s){
+		checksum = checksum ^ i;
 	}
 
 	// will display the calculated checksum in hex
