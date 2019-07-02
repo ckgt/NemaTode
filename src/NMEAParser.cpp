@@ -398,7 +398,7 @@ void NMEAParser::parseText(NMEASentence& nmea, string txt){
 
 	//comma is the last character/only comma
 	if (comma + 1 == txt.size()){		
-		nmea.parameters.push_back("");
+		nmea.parameters.emplace_back("");
 		nmea.isvalid = true;
 		return;	
 	}
@@ -427,7 +427,7 @@ void NMEAParser::parseText(NMEASentence& nmea, string txt){
 		}
 
 		//cout << "NMEA parser Warning: extra comma at end of sentence, but no information...?" << endl;		// it's actually standard, if checksum is disabled
-		nmea.parameters.push_back("");
+		nmea.parameters.emplace_back("");
 
 		stringstream sz;
 		sz << "Found " << nmea.parameters.size() << " parameters.";
