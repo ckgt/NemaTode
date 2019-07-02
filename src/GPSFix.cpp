@@ -243,7 +243,7 @@ GPSFix::~GPSFix() {
 
 // Returns the duration since the Host has received information
 seconds GPSFix::timeSinceLastUpdate(){
-	time_t now = time(NULL);
+	time_t now = time(nullptr);
 	struct tm stamp = { 0 };
 
 	stamp.tm_hour = timestamp.hour;
