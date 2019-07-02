@@ -58,7 +58,7 @@ public:
 	};
 public:
 	NMEASentence();
-	virtual ~NMEASentence();
+	virtual ~NMEASentence() = default;
 
 	bool checksumOK() const;
 	bool valid() const;
@@ -75,7 +75,7 @@ public:
 
 	NMEAParseError(std::string msg);
 	NMEAParseError(std::string msg, NMEASentence n);
-	virtual ~NMEAParseError();
+	virtual ~NMEAParseError() = default;
 
 	std::string what();
 };
@@ -98,7 +98,7 @@ private:
 public:
 
 	NMEAParser();
-	virtual ~NMEAParser();
+	virtual ~NMEAParser() = default;
 
 	bool log;
 

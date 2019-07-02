@@ -28,9 +28,6 @@ NMEAParseError::NMEAParseError(std::string msg, NMEASentence n)
 	: message(std::move(msg)), nmea(n)
 {}
 
-NMEAParseError::~NMEAParseError()
-{}
-
 std::string NMEAParseError::what(){
 	return message;
 }
@@ -45,9 +42,6 @@ NMEASentence::NMEASentence()
 , checksumIsCalculated(false)
 , calculatedChecksum(0)
 , parsedChecksum(0)
-{ }
-
-NMEASentence::~NMEASentence()
 { }
 
 bool NMEASentence::valid() const {
@@ -113,10 +107,6 @@ NMEAParser::NMEAParser()
 , maxbuffersize(NMEA_PARSER_MAX_BUFFER_SIZE)
 , fillingbuffer(false)
 { }
-
-NMEAParser::~NMEAParser() 
-{ }
-
 
 void NMEAParser::setSentenceHandler(std::string cmdKey, std::function<void(const NMEASentence&)> handler){
 	eventTable.erase(cmdKey);
