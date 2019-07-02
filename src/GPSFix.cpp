@@ -223,7 +223,7 @@ GPSFix::GPSFix() {
 	status = 'V';	// Void
 	type = 1;		// 1=none, 2=2d, 3=3d
 
-	haslock = 0;
+	haslock = false;
 
 	dilution = 0;		
 	horizontalDilution = 0;		// Horizontal - Best is 1, >20 is terrible, so 0 means uninitialized
