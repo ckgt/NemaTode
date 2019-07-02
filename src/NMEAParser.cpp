@@ -22,10 +22,10 @@ using namespace nmea;
 // --------- NMEA PARSE ERROR--------------
 
 NMEAParseError::NMEAParseError(std::string msg)
-	: message(msg)
+	: message(std::move(msg))
 {}
 NMEAParseError::NMEAParseError(std::string msg, NMEASentence n)
-	: message(msg), nmea(n)
+	: message(std::move(msg)), nmea(n)
 {}
 
 NMEAParseError::~NMEAParseError()
