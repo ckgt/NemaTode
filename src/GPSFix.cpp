@@ -8,6 +8,8 @@
  */
 
 #include <nmeaparse/GPSFix.h>
+
+#include <array>
 #include <cmath>
 #include <string>
 #include <sstream>
@@ -146,7 +148,7 @@ std::string GPSTimestamp::monthName(uint32_t index){
 		return ss.str();
 	}
 
-	std::string names[] = {
+	std::array<std::string, 12> names = {
 		"January",
 		"February",
 		"March",
@@ -297,7 +299,7 @@ std::string GPSFix::travelAngleToCompassDirection(double deg, bool abbrev){
 	}
 
 	if (abbrev){
-		std::string dirs[] = {
+		std::array<std::string, 9> dirs = {
 			"N",
 			"NE",
 			"E",
@@ -311,7 +313,7 @@ std::string GPSFix::travelAngleToCompassDirection(double deg, bool abbrev){
 		return dirs[r];
 	}
 	else {
-		std::string dirs[] = {
+		std::array<std::string, 9> dirs = {
 			"North",
 			"North East",
 			"East",
