@@ -8,6 +8,8 @@
  */
 
 #include <nmeaparse/GPSFix.h>
+
+#include <array>
 #include <cmath>
 #include <string>
 #include <sstream>
@@ -146,7 +148,7 @@ std::string GPSTimestamp::monthName(uint32_t index){
 		return ss.str();
 	}
 
-	std::string names[] = {
+	std::array<std::string, 12> names = {
 		"January",
 		"February",
 		"March",
@@ -221,7 +223,7 @@ GPSFix::GPSFix() {
 	status = 'V';	// Void
 	type = 1;		// 1=none, 2=2d, 3=3d
 
-	haslock = 0;
+	haslock = false;
 
 	dilution = 0;		
 	horizontalDilution = 0;		// Horizontal - Best is 1, >20 is terrible, so 0 means uninitialized
@@ -237,13 +239,9 @@ GPSFix::GPSFix() {
 
 }
 
-GPSFix::~GPSFix() {
-	// TODO Auto-generated destructor stub
-}
-
 // Returns the duration since the Host has received information
 seconds GPSFix::timeSinceLastUpdate(){
-	time_t now = time(NULL);
+	time_t now = time(nullptr);
 	struct tm stamp = { 0 };
 
 	stamp.tm_hour = timestamp.hour;
@@ -297,7 +295,7 @@ std::string GPSFix::travelAngleToCompassDirection(double deg, bool abbrev){
 	}
 
 	if (abbrev){
-		std::string dirs[] = {
+		std::array<std::string, 9> dirs = {
 			"N",
 			"NE",
 			"E",
@@ -311,7 +309,7 @@ std::string GPSFix::travelAngleToCompassDirection(double deg, bool abbrev){
 		return dirs[r];
 	}
 	else {
-		std::string dirs[] = {
+		std::array<std::string, 9> dirs = {
 			"North",
 			"North East",
 			"East",

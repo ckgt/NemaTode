@@ -33,7 +33,7 @@ public:
 	GPSFix fix;
 
 	GPSService(NMEAParser& parser);
-	virtual ~GPSService();
+	virtual ~GPSService() = default;
 
 	Event<void(bool)> onLockStateChanged;		// user assignable handler, called whenever lock changes
 	Event<void()> onUpdate;						// user assignable handler, called whenever fix changes

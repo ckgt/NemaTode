@@ -14,11 +14,6 @@
 using namespace std;
 using namespace nmea;
 
-
-NMEACommand::NMEACommand(){};
-
-NMEACommand::~NMEACommand(){};
-
 string NMEACommand::toString(){
 	return addChecksum(message);
 }

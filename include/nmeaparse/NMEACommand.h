@@ -20,8 +20,7 @@ namespace nmea {
 			std::string message;
 			std::string name;
 			char checksum;
-			NMEACommand();
-			virtual ~NMEACommand();
+			virtual ~NMEACommand() = default;
 			virtual std::string toString();
 			std::string addChecksum(std::string s);
 		};

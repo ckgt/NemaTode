@@ -135,7 +135,7 @@ namespace nmea {
 	public:
 
 		GPSFix();
-		virtual ~GPSFix();
+		virtual ~GPSFix() = default;
 
 
 		GPSAlmanac almanac;

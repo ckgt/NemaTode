@@ -127,22 +127,23 @@ int main(int argc, char** argv){
 
 	// Read the data stream...
 	// These don't have correct checksums. They're made up.
-	char data[] = "  $MYNMEA,1,3,3,7,Hello*A2\n		\
-					$IRRELEVANT,5,5,5*AA\n			\
-					$ERRORS,:D,\n					\
-					$\n								\
-					$$\n							\
-					$*\n							\
-					$*,\n							\
-					$,\n							\
-					$,*\n							\
-					garbage that will be			\
-					!IgN0r3d @)(&%!!!				\
-					$MYNMEA,1,3,3,7,World!*A2\r\n	\
-					";
-	for (int i = 0; i < sizeof(data); i++){
+	const std::string data =
+		"  $MYNMEA,1,3,3,7,Hello*A2\n		\
+			$IRRELEVANT,5,5,5*AA\n			\
+			$ERRORS,:D,\n					\
+			$\n								\
+			$$\n							\
+			$*\n							\
+			$*,\n							\
+			$,\n							\
+			$,*\n							\
+			garbage that will be			\
+			!IgN0r3d @)(&%!!!				\
+			$MYNMEA,1,3,3,7,World!*A2\r\n	\
+			";
+	for (const char byte : data) {
 		try {
-			custom_parser.readByte(data[i]);
+			custom_parser.readByte(byte);
 		}
 		catch (NMEAParseError& e){
 			cout << e.what() << endl;
