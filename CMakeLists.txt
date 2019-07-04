@@ -35,6 +35,14 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 	SOVERSION 1
 )
 
+if(CMAKE_VERSION VERSION_LESS 3.8)
+	# CMake did not have cxx_std_11 compile feature prior to 3.8
+	# We use cxx_auto_type as a proxy because this feature is a part of c++11 standard
+	target_compile_features(${PROJECT_NAME} PUBLIC cxx_auto_type)
+else()
+	target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)
+endif()
+
 target_include_directories(${PROJECT_NAME} PUBLIC
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 	$<INSTALL_INTERFACE:include>
