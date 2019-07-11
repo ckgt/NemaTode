@@ -7,8 +7,7 @@
  *  See the license file included with this source.
  */
 
-#ifndef GPSFIX_H_
-#define GPSFIX_H_
+#pragma once
 
 #include <cstdint>
 #include <ctime>
@@ -178,5 +177,3 @@ namespace nmea {
 	};
 
 }
-
-#endif /* GPSFIX_H_ */

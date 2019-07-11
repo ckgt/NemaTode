@@ -7,8 +7,7 @@
  *  See the license file included with this source.
  */
 
-#ifndef NMEACOMMAND_H_
-#define NMEACOMMAND_H_
+#pragma once
 
 #include <string>
 #include <nmeaparse/NMEAParser.h>
@@ -113,5 +112,3 @@ namespace nmea {
 
 
 }
-
-#endif /* NMEACOMMAND_H_ */
