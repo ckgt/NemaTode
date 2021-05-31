@@ -167,7 +167,7 @@ std::string GPSTimestamp::monthName(uint32_t index){
 time_t GPSTimestamp::getTime() {
 	struct tm t = { 0 };
 	t.tm_year = year - 1900;	// This is year-1900, so 112 = 2012
-	t.tm_mon = month;			// month from 0:Jan
+	t.tm_mon = month - 1;		// month from 0:Jan
 	t.tm_mday = day;
 	t.tm_hour = hour;
 	t.tm_min = min;
