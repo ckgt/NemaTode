@@ -440,6 +440,8 @@ void NMEAParser::parseText(NMEASentence& nmea, string txt){
 		sz << "Found " << nmea.parameters.size() << " parameters.";
 		onInfo(nmea, sz.str());
 
+        	string tmp_str;
+
 		//possible checksum at end...
 		size_t endi = nmea.parameters.size() - 1;
 		size_t checki = nmea.parameters[endi].find_last_of('*');
@@ -450,7 +452,17 @@ void NMEAParser::parseText(NMEASentence& nmea, string txt){
 				onError(nmea, "Checksum '*' character at end, but no data.");
 			}
 			else{
-				nmea.checksum = last.substr(checki + 1, last.size() - checki);		//extract checksum without '*'
+
+                //extract checksum without '*' and \n,\r
+
+                // copy into temporary string
+                tmp_str = last.substr(checki + 1, last.size() - checki);
+
+                // remove superflous line breaks and carriage returns
+                tmp_str.erase(std::remove(tmp_str.begin(), tmp_str.end(), '\n'),tmp_str.end());
+                tmp_str.erase(std::remove(tmp_str.begin(), tmp_str.end(), '\r'),tmp_str.end());
+
+                nmea.checksum = tmp_str;
 
 				onInfo(nmea, string("Found checksum. (\"*") + nmea.checksum + "\")");
 
@@ -461,10 +473,10 @@ void NMEAParser::parseText(NMEASentence& nmea, string txt){
 				}
 				catch( NumberConversionError& )
 				{
-					onError(nmea, string("parseInt() error. Parsed checksum string was not readable as hex. (\"") +  nmea.checksum + "\")");
+                    onError(nmea, string("parseInt() error. Parsed checksum string was not readable as hex. (\"") +  nmea.checksum + "\")");
 				}
 				
-				onInfo(nmea, string("Checksum ok? ") + (nmea.checksumOK() ? "YES" : "NO") + "!");
+                onInfo(nmea, string("Checksum ok? ") + (nmea.checksumOK() ? "YES" : "NO") + "!");
 				
 
 			}
