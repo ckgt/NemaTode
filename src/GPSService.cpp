@@ -92,6 +92,62 @@ void GPSService::attachToParser(NMEAParser& _parser){
 		this->read_GPVTG(nmea);
 	});
 
+    // https://anavs.com/knowledgebase/nmea-format/
+
+//    * GP for GPS only solutions
+//    * GL for GLONASS only solutions
+//    * GA for GALILEO only solutions
+//    * GN for multi GNSS solutions
+
+
+    _parser.setSentenceHandler("GLGGA", [this](const NMEASentence& nmea){
+        this->read_GPGGA(nmea);
+    });
+    _parser.setSentenceHandler("GLGSA", [this](const NMEASentence& nmea){
+        this->read_GPGSA(nmea);
+    });
+    _parser.setSentenceHandler("GLGSV", [this](const NMEASentence& nmea){
+        this->read_GPGSV(nmea);
+    });
+    _parser.setSentenceHandler("GLRMC", [this](const NMEASentence& nmea){
+        this->read_GPRMC(nmea);
+    });
+    _parser.setSentenceHandler("GLVTG", [this](const NMEASentence& nmea){
+        this->read_GPVTG(nmea);
+    });
+
+    _parser.setSentenceHandler("GAGGA", [this](const NMEASentence& nmea){
+        this->read_GPGGA(nmea);
+    });
+    _parser.setSentenceHandler("GAGSA", [this](const NMEASentence& nmea){
+        this->read_GPGSA(nmea);
+    });
+    _parser.setSentenceHandler("GAGSV", [this](const NMEASentence& nmea){
+        this->read_GPGSV(nmea);
+    });
+    _parser.setSentenceHandler("GARMC", [this](const NMEASentence& nmea){
+        this->read_GPRMC(nmea);
+    });
+    _parser.setSentenceHandler("GAVTG", [this](const NMEASentence& nmea){
+        this->read_GPVTG(nmea);
+    });
+
+
+    _parser.setSentenceHandler("GNGGA", [this](const NMEASentence& nmea){
+        this->read_GPGGA(nmea);
+    });
+    _parser.setSentenceHandler("GNGSA", [this](const NMEASentence& nmea){
+        this->read_GPGSA(nmea);
+    });
+    _parser.setSentenceHandler("GNGSV", [this](const NMEASentence& nmea){
+        this->read_GPGSV(nmea);
+    });
+    _parser.setSentenceHandler("GNRMC", [this](const NMEASentence& nmea){
+        this->read_GPRMC(nmea);
+    });
+    _parser.setSentenceHandler("GNVTG", [this](const NMEASentence& nmea){
+        this->read_GPVTG(nmea);
+    });
 }
 
 
