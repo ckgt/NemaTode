@@ -58,7 +58,7 @@ namespace nmea {
 		// (none)
 
 		// Functions
-		EventHandler(std::function<void(Args...)> h) : _iterator(), handler(h), ID(++LastID)
+		EventHandler(std::function<void(Args...)> h) : _iterator(), ID(++LastID), handler(h) 
 		{}
 
 		EventHandler(const EventHandler& ref){
